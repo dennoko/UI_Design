@@ -1,0 +1,401 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+
+    <!-- ───────── ヘッダー (固定クローム) ───────── -->
+    <ui:VisualElement class="dennoko-header">
+        <ui:VisualElement class="dennoko-header-titlegroup">
+            <ui:Label text="UI DESIGN TEST" class="dennoko-title" />
+            <ui:Label name="version-label" text="v1.0.0" class="dennoko-version-label" />
+            <ui:Button name="version-reload-button" text="↻" tooltip="バージョン表示の状態を切り替える (通常 → 更新あり → 取得失敗)" class="dennoko-version-reload-button" />
+        </ui:VisualElement>
+        <ui:VisualElement class="uitest-header-actions">
+            <ui:Button name="disable-all-button" text="全体を無効化" tooltip="スクロール領域全体の無効状態 (SetEnabled(false)) を確認する" class="dennoko-button-secondary" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement class="dennoko-separator" />
+
+    <!-- ───────── スクロール領域 (縮小時はここだけが縮む) ───────── -->
+    <ui:ScrollView name="main-scroll" class="dennoko-scroll">
+
+        <!-- ═══ 1. カラーパレット ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="COLOR PALETTE" class="dennoko-section-title dennoko-card-header" />
+
+            <ui:Label text="サーフェス / 境界線" class="uitest-subhead uitest-subhead--first" />
+            <ui:VisualElement class="uitest-swatch-grid">
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--surface-0" />
+                    <ui:VisualElement><ui:Label text="Surface 0  #121212" class="uitest-swatch-name" /><ui:Label text="--dennoko-surface-0" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--surface-1" />
+                    <ui:VisualElement><ui:Label text="Surface 1  #1e1e1e" class="uitest-swatch-name" /><ui:Label text="--dennoko-surface-1" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--surface-2" />
+                    <ui:VisualElement><ui:Label text="Surface 2  #2c2c2c" class="uitest-swatch-name" /><ui:Label text="--dennoko-surface-2" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--outline" />
+                    <ui:VisualElement><ui:Label text="Outline  #484848" class="uitest-swatch-name" /><ui:Label text="--dennoko-outline" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:Label text="テキスト" class="uitest-subhead" />
+            <ui:VisualElement class="uitest-swatch-grid">
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--text-primary" />
+                    <ui:VisualElement><ui:Label text="Primary  #ffffff" class="uitest-swatch-name" /><ui:Label text="--dennoko-text-primary" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--text-secondary" />
+                    <ui:VisualElement><ui:Label text="Secondary  #cccccc" class="uitest-swatch-name" /><ui:Label text="--dennoko-text-secondary" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--text-tertiary" />
+                    <ui:VisualElement><ui:Label text="Tertiary  #aaaaaa" class="uitest-swatch-name" /><ui:Label text="--dennoko-text-tertiary" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--text-disabled" />
+                    <ui:VisualElement><ui:Label text="Disabled  #555555" class="uitest-swatch-name" /><ui:Label text="--dennoko-text-disabled" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:Label text="セマンティック" class="uitest-subhead" />
+            <ui:VisualElement class="uitest-swatch-grid">
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--error" />
+                    <ui:VisualElement><ui:Label text="Error  #9b1b30" class="uitest-swatch-name" /><ui:Label text="--dennoko-semantic-error" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--warning" />
+                    <ui:VisualElement><ui:Label text="Warning  #ffb74d" class="uitest-swatch-name" /><ui:Label text="--dennoko-semantic-warning" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--success" />
+                    <ui:VisualElement><ui:Label text="Success  #4caf50" class="uitest-swatch-name" /><ui:Label text="--dennoko-semantic-success" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--info" />
+                    <ui:VisualElement><ui:Label text="Info  #64b5f6" class="uitest-swatch-name" /><ui:Label text="--dennoko-semantic-info" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:Label text="インタラクション / 派生色" class="uitest-subhead" />
+            <ui:VisualElement class="uitest-swatch-grid">
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--accent" />
+                    <ui:VisualElement><ui:Label text="Accent  #ffffff" class="uitest-swatch-name" /><ui:Label text="--dennoko-accent" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--checkmark" />
+                    <ui:VisualElement><ui:Label text="Checkmark  #777777" class="uitest-swatch-name" /><ui:Label text="--dennoko-checkmark" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--status-success" />
+                    <ui:VisualElement><ui:Label text="Status Success BG" class="uitest-swatch-name" /><ui:Label text="--dennoko-status-success-bg" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--status-error" />
+                    <ui:VisualElement><ui:Label text="Status Error BG" class="uitest-swatch-name" /><ui:Label text="--dennoko-status-error-bg" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--status-error-text" />
+                    <ui:VisualElement><ui:Label text="Status Error Text  #ffa6a6" class="uitest-swatch-name" /><ui:Label text="--dennoko-status-error-text" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--hover-overlay" />
+                    <ui:VisualElement><ui:Label text="Hover Overlay (予約)" class="uitest-swatch-name" /><ui:Label text="--dennoko-hover-overlay" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:Label text="Elevation (明度差による重なり)" class="uitest-subhead" />
+            <ui:VisualElement class="uitest-elev-0">
+                <ui:Label text="Surface 0 — 最背面" class="dennoko-text-tertiary" />
+                <ui:VisualElement class="uitest-elev-1">
+                    <ui:Label text="Surface 1 — カード" />
+                    <ui:VisualElement class="uitest-elev-2">
+                        <ui:Label text="Surface 2 — ツールバー / ホバー / 強調" class="dennoko-text-primary" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ═══ 2. タイポグラフィ ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="TYPOGRAPHY" class="dennoko-section-title dennoko-card-header" />
+            <ui:Label text="ウィンドウタイトル (.dennoko-title)" class="dennoko-title uitest-type-sample" />
+            <ui:Label text="SECTION TITLE (.dennoko-section-title)" class="dennoko-section-title uitest-type-sample" />
+            <ui:Label text="強調テキスト (.dennoko-text-primary)" class="dennoko-text-primary uitest-type-sample" />
+            <ui:Label text="本文・標準ラベル (クラス指定なし)" class="uitest-type-sample" />
+            <ui:Label text="補足・注記 (.dennoko-text-tertiary)" class="dennoko-text-tertiary uitest-type-sample" />
+            <ui:Label text="無効テキスト (.dennoko-text-disabled)" class="dennoko-text-disabled uitest-type-sample" />
+            <ui:Label text="エラー (.dennoko-text-error)" class="dennoko-text-error uitest-type-sample" />
+            <ui:Label text="警告 (.dennoko-text-warning)" class="dennoko-text-warning uitest-type-sample" />
+            <ui:Label text="成功 (.dennoko-text-success)" class="dennoko-text-success uitest-type-sample" />
+            <ui:Label text="情報 (.dennoko-text-info)" class="dennoko-text-info uitest-type-sample" />
+            <ui:Label text="長い説明文の折り返し確認: ウィンドウの幅を狭くしたときに、文章が途中で切れずに次の行へ折り返されるかを確認するためのサンプル文章です。" class="uitest-note" />
+
+            <ui:Label text="バージョン表記" class="uitest-subhead" />
+            <ui:VisualElement class="uitest-version-row">
+                <ui:Label text="通常" />
+                <ui:Label text="v1.0.0" class="dennoko-version-label" />
+            </ui:VisualElement>
+            <ui:VisualElement class="uitest-version-row">
+                <ui:Label text="更新あり" />
+                <ui:Label text="v1.0.0 → v1.1.0" class="dennoko-version-label dennoko-version-label--update" />
+            </ui:VisualElement>
+            <ui:VisualElement class="uitest-version-row">
+                <ui:Label text="取得失敗" />
+                <ui:Label text="v1.0.0 (取得失敗)" class="dennoko-version-label dennoko-version-label--error" />
+                <ui:Button text="↻" class="dennoko-version-reload-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ═══ 3. ボタン ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="BUTTONS" class="dennoko-section-title dennoko-card-header" />
+
+            <ui:Label text="バリエーション" class="uitest-subhead uitest-subhead--first" />
+            <ui:VisualElement class="uitest-row">
+                <ui:Button text="Default" />
+                <ui:Button text="Secondary" class="dennoko-button-secondary" />
+                <ui:Button text="Active" class="dennoko-button-active" />
+                <ui:Button name="disabled-button" text="Disabled" />
+            </ui:VisualElement>
+            <ui:Button text="Primary Action (.dennoko-button-primary)" class="dennoko-button-primary" />
+
+            <ui:Label text="排他選択 (選択中は青枠 .dennoko-button-active)" class="uitest-subhead" />
+            <ui:VisualElement class="dennoko-hrow">
+                <ui:Button name="mode-select" text="Select" class="uitest-equal" />
+                <ui:Button name="mode-paint" text="Paint" class="uitest-equal" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-hrow">
+                <ui:Button name="tool-brush" text="Brush" class="uitest-equal" />
+                <ui:Button name="tool-rect" text="Rect" class="uitest-equal" />
+                <ui:Button name="tool-lasso" text="Lasso" class="uitest-equal" />
+                <ui:Button name="tool-eraser" text="Eraser" class="uitest-equal" />
+            </ui:VisualElement>
+
+            <ui:Label text="ON / OFF ボタン型トグル" class="uitest-subhead" />
+            <ui:VisualElement class="uitest-row">
+                <ui:Button name="onoff-button" text="Preview: OFF" />
+                <ui:Label name="onoff-label" text="プレビューは無効です" class="dennoko-text-tertiary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ═══ 4. テキスト / 数値入力 ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="TEXT &amp; NUMBER INPUT" class="dennoko-section-title dennoko-card-header" />
+            <ui:TextField name="text-field" label="TextField" value="サンプルテキスト" />
+            <ui:TextField label="Multiline" multiline="true" value="複数行の入力欄&#10;2 行目のテキスト" />
+            <ui:TextField label="Password" password="true" value="secret" />
+            <ui:TextField name="readonly-field" label="Read Only" value="読み取り専用" readonly="true" />
+            <ui:TextField label="Max Length 8" max-length="8" value="12345678" />
+            <ui:IntegerField label="IntegerField" value="42" />
+            <ui:FloatField label="FloatField" value="3.14" />
+            <ui:LongField label="LongField" value="9007199254740991" />
+            <ui:Vector2Field label="Vector2Field" />
+            <ui:Vector3Field label="Vector3Field" />
+            <ui:Vector4Field label="Vector4Field" />
+            <ui:Vector2IntField label="Vector2IntField" />
+            <ui:RectField label="RectField" />
+            <ui:BoundsField label="BoundsField" />
+        </ui:VisualElement>
+
+        <!-- ═══ 5. 選択系 ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="SELECTION" class="dennoko-section-title dennoko-card-header" />
+            <ui:DropdownField name="dropdown-field" label="DropdownField" />
+            <ui:EnumField name="enum-field" label="EnumField" />
+            <uie:EnumFlagsField name="enum-flags-field" label="EnumFlagsField" />
+            <uie:MaskField name="mask-field" label="MaskField" />
+            <uie:LayerField label="LayerField" />
+            <uie:LayerMaskField label="LayerMaskField" />
+            <uie:TagField label="TagField" value="Untagged" />
+            <ui:RadioButtonGroup name="radio-group" label="RadioButtonGroup" />
+        </ui:VisualElement>
+
+        <!-- ═══ 6. エディタ専用フィールド ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="EDITOR FIELDS" class="dennoko-section-title dennoko-card-header" />
+            <uie:ObjectField label="Texture2D" type="UnityEngine.Texture2D, UnityEngine.CoreModule" />
+            <uie:ObjectField label="GameObject" type="UnityEngine.GameObject, UnityEngine.CoreModule" allow-scene-objects="true" />
+            <uie:ObjectField label="Material" type="UnityEngine.Material, UnityEngine.CoreModule" />
+
+            <ui:Label text="伸びる入力欄 + 固定幅ボタン (.dennoko-hrow / .dennoko-col-grow)" class="uitest-subhead" />
+            <ui:VisualElement class="dennoko-hrow">
+                <uie:ObjectField name="hrow-object-field" label="Target" type="UnityEngine.GameObject, UnityEngine.CoreModule" allow-scene-objects="true" class="dennoko-col-grow" />
+                <ui:Button name="hrow-clear-button" text="Clear" class="uitest-fixed-button" />
+            </ui:VisualElement>
+
+            <ui:Label text="カラー / カーブ / グラデーション" class="uitest-subhead" />
+            <uie:ColorField name="color-field" label="ColorField" />
+            <uie:ColorField name="hdr-color-field" label="ColorField (HDR)" hdr="true" />
+            <uie:CurveField name="curve-field" label="CurveField" />
+            <uie:GradientField name="gradient-field" label="GradientField" />
+        </ui:VisualElement>
+
+        <!-- ═══ 7. スライダー / プログレス ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="SLIDERS &amp; PROGRESS" class="dennoko-section-title dennoko-card-header" />
+            <ui:Slider label="Slider" low-value="0" high-value="1" value="0.5" show-input-field="true" />
+            <ui:Slider label="Slider (入力欄なし)" low-value="0" high-value="100" value="30" />
+            <ui:SliderInt label="SliderInt" low-value="0" high-value="10" value="4" show-input-field="true" />
+            <ui:Slider label="Vertical" low-value="0" high-value="1" value="0.7" direction="Vertical" style="height: 80px;" />
+            <ui:MinMaxSlider name="minmax-slider" label="MinMaxSlider" min-value="20" max-value="70" low-limit="0" high-limit="100" />
+            <ui:Label name="minmax-label" text="範囲: 20.0 – 70.0" class="dennoko-text-tertiary uitest-indent" />
+            <ui:ProgressBar name="progress-bar" title="ProgressBar 40%" value="40" low-value="0" high-value="100" />
+            <ui:VisualElement class="uitest-row">
+                <ui:Button name="progress-run-button" text="進行を再生" class="dennoko-button-secondary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ═══ 8. トグル / ラジオ / フォールドアウト ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="TOGGLES &amp; FOLDOUTS" class="dennoko-section-title dennoko-card-header" />
+
+            <ui:Label text="Toggle (囲まない・テキスト行として見せる)" class="uitest-subhead uitest-subhead--first" />
+            <ui:Toggle text="text= 指定のトグル (ON)" value="true" />
+            <ui:Toggle text="text= 指定のトグル (OFF)" value="false" />
+            <ui:Toggle label="label= 指定のトグル" value="true" />
+
+            <ui:Label text="トグルで制御される従属項目 (インデントのみで階層を示す)" class="uitest-subhead" />
+            <ui:Toggle name="overwrite-toggle" text="上書き保存を有効にする" value="false" />
+            <ui:VisualElement name="overwrite-group" class="uitest-indent">
+                <ui:TextField label="保存先" value="Assets/Output" />
+                <ui:Toggle text="バックアップを作成する" value="true" />
+            </ui:VisualElement>
+
+            <ui:Label text="RadioButton (単体)" class="uitest-subhead" />
+            <ui:RadioButton text="オプション A" value="true" />
+            <ui:RadioButton text="オプション B" />
+
+            <ui:Label text="Foldout" class="uitest-subhead" />
+            <ui:Foldout text="詳細設定 (展開)" value="true">
+                <ui:Slider label="強度" low-value="0" high-value="1" value="0.25" show-input-field="true" />
+                <ui:Toggle text="自動更新" value="true" />
+                <ui:Foldout text="入れ子の Foldout (折りたたみ)" value="false">
+                    <ui:TextField label="メモ" value="入れ子の中身" />
+                </ui:Foldout>
+            </ui:Foldout>
+            <ui:Foldout text="閉じた Foldout" value="false">
+                <ui:Label text="展開時のみ表示される内容" />
+            </ui:Foldout>
+        </ui:VisualElement>
+
+        <!-- ═══ 9. ON/OFF トグル付きセクション ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:VisualElement class="dennoko-card-header dennoko-toggle-header">
+                <ui:Toggle name="color-correction-toggle" text="TOGGLE SECTION" value="true" class="dennoko-section-title" />
+                <ui:Button name="color-correction-reset" text="Reset" />
+            </ui:VisualElement>
+            <ui:VisualElement name="color-correction-content">
+                <ui:Slider label="Hue" name="hue-slider" low-value="-180" high-value="180" value="0" show-input-field="true" />
+                <ui:Slider label="Saturation" name="sat-slider" low-value="0" high-value="2" value="1" show-input-field="true" />
+                <ui:Label text="トグルを OFF にするとこの領域がグレーアウトします。" class="uitest-note" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ═══ 10. ツールバー / タブ ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:VisualElement class="dennoko-toolbar uitest-card-toolbar">
+                <ui:Button name="toolbar-new" text="New" />
+                <ui:Button name="toolbar-open" text="Open" />
+                <ui:Button name="toolbar-grid" text="Grid" />
+                <ui:VisualElement class="uitest-spacer" />
+                <ui:Toggle name="toolbar-snap" text="Snap" value="true" />
+            </ui:VisualElement>
+            <ui:Label text="TOOLBAR &amp; TABS" class="dennoko-section-title dennoko-card-header" />
+
+            <ui:Label text="タブ切替 (ボタン + .dennoko-button-active)" class="uitest-subhead uitest-subhead--first" />
+            <ui:VisualElement class="uitest-tabbar">
+                <ui:Button name="tab-general" text="一般" class="uitest-equal" />
+                <ui:Button name="tab-output" text="出力" class="uitest-equal" />
+                <ui:Button name="tab-advanced" text="詳細" class="uitest-equal" />
+            </ui:VisualElement>
+            <ui:VisualElement name="panel-general" class="uitest-tab-panel">
+                <ui:TextField label="名前" value="NewAsset" />
+                <ui:Toggle text="起動時に開く" value="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="panel-output" class="uitest-tab-panel">
+                <ui:DropdownField name="output-format" label="形式" />
+                <ui:SliderInt label="品質" low-value="1" high-value="100" value="90" show-input-field="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="panel-advanced" class="uitest-tab-panel">
+                <ui:IntegerField label="スレッド数" value="4" />
+                <ui:Toggle text="ログを詳細に出力する" value="false" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ═══ 11. リスト / スクロール ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="LIST &amp; SCROLL" class="dennoko-section-title dennoko-card-header" />
+
+            <ui:Label text="ListView (動的リスト: C# で生成)" class="uitest-subhead uitest-subhead--first" />
+            <ui:VisualElement class="dennoko-hrow">
+                <ui:Button name="list-add" text="追加" class="uitest-equal" />
+                <ui:Button name="list-remove" text="選択を削除" class="uitest-equal" />
+            </ui:VisualElement>
+            <ui:ListView name="sample-list" fixed-item-height="22" selection-type="Multiple" show-alternating-row-backgrounds="ContentOnly" class="uitest-list" />
+
+            <ui:Label text="横スクロール (ScrollView mode=Horizontal)" class="uitest-subhead" />
+            <ui:ScrollView mode="Horizontal" class="uitest-hscroll">
+                <ui:Label text="Item 01" class="uitest-hscroll-item" />
+                <ui:Label text="Item 02" class="uitest-hscroll-item" />
+                <ui:Label text="Item 03" class="uitest-hscroll-item" />
+                <ui:Label text="Item 04" class="uitest-hscroll-item" />
+                <ui:Label text="Item 05" class="uitest-hscroll-item" />
+                <ui:Label text="Item 06" class="uitest-hscroll-item" />
+                <ui:Label text="Item 07" class="uitest-hscroll-item" />
+                <ui:Label text="Item 08" class="uitest-hscroll-item" />
+            </ui:ScrollView>
+        </ui:VisualElement>
+
+        <!-- ═══ 12. フィードバック ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="FEEDBACK" class="dennoko-section-title dennoko-card-header" />
+
+            <ui:Label text="HelpBox" class="uitest-subhead uitest-subhead--first" />
+            <ui:HelpBox text="情報: 処理は数秒で完了します。" message-type="Info" />
+            <ui:HelpBox text="警告: 元のファイルは上書きされます。" message-type="Warning" />
+            <ui:HelpBox text="エラー: 対象のオブジェクトが見つかりません。" message-type="Error" />
+            <ui:HelpBox text="アイコンなしのメッセージ" message-type="None" />
+
+            <ui:Label text="ステータスバー (下部の表示を切り替え)" class="uitest-subhead" />
+            <ui:VisualElement class="dennoko-hrow">
+                <ui:Button name="status-info" text="Info" class="uitest-equal" />
+                <ui:Button name="status-success" text="Success" class="uitest-equal" />
+                <ui:Button name="status-error" text="Error" class="uitest-equal" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ═══ 13. 無効状態 ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="DISABLED STATE" class="dennoko-section-title dennoko-card-header" />
+            <ui:Label text="以下はすべて SetEnabled(false) された状態です。" class="uitest-note" />
+            <ui:VisualElement name="disabled-content">
+                <ui:Button text="Button" />
+                <ui:TextField label="TextField" value="無効な入力欄" />
+                <ui:DropdownField name="disabled-dropdown" label="DropdownField" />
+                <uie:ObjectField label="ObjectField" type="UnityEngine.Texture2D, UnityEngine.CoreModule" />
+                <ui:Slider label="Slider" low-value="0" high-value="1" value="0.5" show-input-field="true" />
+                <ui:Toggle text="Toggle (ON)" value="true" />
+                <ui:Toggle text="Toggle (OFF)" value="false" />
+                <ui:Foldout text="Foldout" value="false" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:ScrollView>
+
+    <ui:VisualElement class="dennoko-separator" />
+
+    <!-- ───────── フッター (固定クローム) ───────── -->
+    <ui:VisualElement class="dennoko-card dennoko-footer">
+        <ui:Button name="apply-button" text="Apply &amp; Save" class="dennoko-button-primary" />
+        <ui:Button name="reset-all-button" text="Reset All" class="dennoko-button-secondary" />
+    </ui:VisualElement>
+
+    <!-- ステータスバー -->
+    <ui:Label name="status-label" text="Ready" class="dennoko-status" />
+
+</ui:UXML>
