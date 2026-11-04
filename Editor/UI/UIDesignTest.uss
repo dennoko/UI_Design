@@ -17,18 +17,7 @@
     align-items: center;
 }
 
-/* 伸びる入力欄 + 固定幅ボタンの横並び (折り返しなし) */
-.dennoko-root .dennoko-hrow {
-    flex-direction: row;
-    align-items: center;
-}
-
-/* 伸びて縮む子要素 (uss-conventions.md §5: flex-grow と flex-shrink は必ずセット) */
-.dennoko-root .dennoko-col-grow {
-    flex-grow: 1;
-    flex-shrink: 1;
-    overflow: hidden;
-}
+/* ※ .dennoko-hrow / .dennoko-col-grow は DennokoTheme.uss に定義済み */
 
 /* 横並びの中で縮まない固定幅ボタン */
 .dennoko-root .uitest-fixed-button {
@@ -91,12 +80,27 @@
     flex-wrap: wrap;
 }
 
+/* 2 カラム固定。左列の文字数に右列の開始位置が押し出されないよう、
+   幅を 50% に固定して伸縮させず、はみ出す文字は省略表示にする。
+   (min-width を付けると狭いウィンドウでコンテンツ幅が広がり、
+   カードがスクロールバーの下へはみ出す原因になる) */
 .dennoko-root .uitest-swatch {
     width: 50%;
-    min-width: 180px;
+    max-width: 50%;
+    flex-basis: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
     flex-direction: row;
     align-items: center;
-    padding: 3px 0;
+    padding: 3px 8px 3px 0;
+    overflow: hidden;
+}
+
+.dennoko-root .uitest-swatch-text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .dennoko-root .uitest-swatch-chip {
@@ -112,17 +116,32 @@
 .dennoko-root .uitest-swatch-name {
     font-size: 11px;
     color: var(--dennoko-text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .dennoko-root .uitest-swatch-var {
     font-size: 10px;
     color: var(--dennoko-text-tertiary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .dennoko-root .uitest-chip--surface-0       { background-color: var(--dennoko-surface-0); }
 .dennoko-root .uitest-chip--surface-1       { background-color: var(--dennoko-surface-1); }
 .dennoko-root .uitest-chip--surface-2       { background-color: var(--dennoko-surface-2); }
+.dennoko-root .uitest-chip--surface-3       { background-color: var(--dennoko-surface-3); }
 .dennoko-root .uitest-chip--outline         { background-color: var(--dennoko-outline); }
+.dennoko-root .uitest-chip--outline-hover   { background-color: var(--dennoko-outline-hover); }
+.dennoko-root .uitest-chip--error-text      { background-color: var(--dennoko-semantic-error-text); }
+.dennoko-root .uitest-chip--selection-border { background-color: var(--dennoko-selection-border); }
+.dennoko-root .uitest-chip--selection-bg    { background-color: var(--dennoko-selection-bg); }
+.dennoko-root .uitest-chip--list-alt        { background-color: var(--dennoko-list-alt-bg); }
+.dennoko-root .uitest-chip--progress-fill   { background-color: var(--dennoko-progress-fill); }
+.dennoko-root .uitest-chip--status-warning  { background-color: var(--dennoko-status-warning-bg); }
+.dennoko-root .uitest-chip--status-info     { background-color: var(--dennoko-status-info-bg); }
 .dennoko-root .uitest-chip--text-primary    { background-color: var(--dennoko-text-primary); }
 .dennoko-root .uitest-chip--text-secondary  { background-color: var(--dennoko-text-secondary); }
 .dennoko-root .uitest-chip--text-tertiary   { background-color: var(--dennoko-text-tertiary); }
@@ -176,16 +195,27 @@
     margin-top: 6px;
 }
 
-/* ─── ツールバー (カード上端に密着させる) ─────────────────
-   DennokoTheme.uss の .dennoko-toolbar 注記どおり、カードの padding / 角丸ぶん
-   はみ出させる。 */
+/* 左の状態ラベル幅を固定し、右のバージョン番号の開始位置を縦に揃える */
+.dennoko-root .uitest-version-key {
+    min-width: 72px;
+    flex-shrink: 0;
+}
+
+/* フィールドの右カラム (ラベル列 150px + フィールドの左マージン) に揃える補足文 */
+.dennoko-root .uitest-field-note {
+    margin-left: 153px;
+    font-size: 11px;
+}
+
+/* ─── ツールバー (カード見出しの下に置く) ─────────────────
+   どのカードも「見出し + 下線」を最上部に置く構造を崩さないよう、
+   ツールバーは見出しの下に角丸のバーとして配置する。 */
 
 .dennoko-root .uitest-card-toolbar {
-    margin: -12px -12px 10px -12px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    border-bottom-width: 1px;
-    border-bottom-color: var(--dennoko-outline);
+    margin-bottom: 8px;
+    border-width: 1px;
+    border-color: var(--dennoko-outline);
+    border-radius: 4px;
 }
 
 /* ─── タブ ─────────────────────────────────────────────── */
@@ -205,8 +235,10 @@
 
 /* ─── リスト / 横スクロール ─────────────────────────────── */
 
+/* 高さ = fixed-item-height (22px) × 5 行 + 上下ボーダー (1px × 2)。
+   行の途中で切れた余白が下に残らないようにする */
 .dennoko-root .uitest-list {
-    height: 132px;
+    height: 112px;
     flex-shrink: 0;
     margin-top: 4px;
     background-color: var(--dennoko-surface-0);
@@ -215,15 +247,27 @@
     border-radius: 4px;
 }
 
+/* 行の高さ (ListView がインラインで指定) の中で垂直中央に置く。
+   Label 既定の上下 margin / padding が上寄りの原因なので 0 にする */
 .dennoko-root .uitest-list-item {
-    padding-left: 8px;
+    margin: 0;
+    padding: 0 8px;
     -unity-text-align: middle-left;
 }
 
+/* 横スクロール領域は沈めた枠で囲み、内側に余白 (インセット) を持たせる */
 .dennoko-root .uitest-hscroll {
-    height: 64px;
+    height: 68px;
     flex-shrink: 0;
     margin-top: 4px;
+    background-color: var(--dennoko-surface-0);
+    border-width: 1px;
+    border-color: var(--dennoko-outline);
+    border-radius: 4px;
+}
+
+.dennoko-root .uitest-hscroll .unity-scroll-view__content-container {
+    padding: 6px 6px 4px 6px;
 }
 
 .dennoko-root .uitest-hscroll-item {

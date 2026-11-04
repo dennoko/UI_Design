@@ -265,18 +265,37 @@ namespace Dennokoworks.UIDesignTest
                     root.Q<Slider>("hue-slider").value = 0f;
                     root.Q<Slider>("sat-slider").value = 1f;
                 });
+
+            root.Q<ColorField>("outline-color-field").value = Color.black;
+            BindToggleSection(root,
+                toggleName:  "outline-toggle",
+                contentName: "outline-content",
+                resetName:   "outline-reset",
+                onReset: () =>
+                {
+                    root.Q<Slider>("outline-width-slider").value = 2f;
+                    root.Q<ColorField>("outline-color-field").value = Color.black;
+                    root.Q<Toggle>("outline-shadow-toggle").value = false;
+                });
         }
 
-        /// <summary>トグル・コンテンツ・Reset ボタンを接続する共通ヘルパー。</summary>
+        private const string CollapsedClass = "dennoko-toggle-section--collapsed";
+
+        /// <summary>
+        /// トグル・コンテンツ・Reset ボタンを接続する共通ヘルパー。
+        /// トグル OFF でセクションを折りたたむ (カード = コンテンツの親に
+        /// .dennoko-toggle-section--collapsed を付ける。見た目は USS 側で定義)。
+        /// </summary>
         private static void BindToggleSection(
             VisualElement root, string toggleName, string contentName,
             string resetName, Action onReset)
         {
             var toggle  = root.Q<Toggle>(toggleName);
             var content = root.Q<VisualElement>(contentName);
+            var section = content.parent;
 
-            toggle.RegisterValueChangedCallback(evt => content.SetEnabled(evt.newValue));
-            content.SetEnabled(toggle.value);
+            toggle.RegisterValueChangedCallback(evt => section.EnableInClassList(CollapsedClass, !evt.newValue));
+            section.EnableInClassList(CollapsedClass, !toggle.value);
 
             var reset = root.Q<Button>(resetName);
             if (reset != null && onReset != null)
