@@ -15,18 +15,42 @@ namespace Dennokoworks.UIDesignTest.Mock
     /// </summary>
     internal sealed class DennokoStatus
     {
+        // 進捗線の色 (USS の .dennoko-status で定義)。見つからないときは線を描かない
+        private static readonly CustomStyleProperty<Color> ProgressColorProperty = new CustomStyleProperty<Color>("--dennoko-status-progress");
+
         private readonly Label _label;
-        private readonly VisualElement _progress;
+        private Color _progressColor = Color.clear;
+        private float _progress = -1f;
         private IVisualElementScheduledItem _reset;
 
         public DennokoStatus(Label label)
         {
             _label = label;
             if (_label == null) return;
-            _progress = new VisualElement { pickingMode = PickingMode.Ignore };
-            _progress.AddToClassList("dennoko-status__progress");
-            _label.Add(_progress);
-            MockUI.Show(_progress, false);
+            // 進捗線は子要素ではなく Label 自身に描く。子要素を足すと Label の文字の高さが測られなくなる
+            _label.generateVisualContent += DrawProgress;
+            _label.RegisterCallback<CustomStyleResolvedEvent>(e =>
+            {
+                if (e.customStyle.TryGetValue(ProgressColorProperty, out var color)) _progressColor = color;
+                _label.MarkDirtyRepaint();
+            });
+        }
+
+        private void DrawProgress(MeshGenerationContext context)
+        {
+            if (_progress < 0f || _progressColor.a <= 0f) return;
+            float width = _label.layout.width * _progress;
+            float bottom = _label.layout.height;
+            if (width <= 0f || float.IsNaN(bottom)) return;
+            var painter = context.painter2D;
+            painter.fillColor = _progressColor;
+            painter.BeginPath();
+            painter.MoveTo(new Vector2(0f, bottom - 2f));
+            painter.LineTo(new Vector2(width, bottom - 2f));
+            painter.LineTo(new Vector2(width, bottom));
+            painter.LineTo(new Vector2(0f, bottom));
+            painter.ClosePath();
+            painter.Fill();
         }
 
         public void Set(string message, StatusType type = StatusType.Info, float progress = -1f)
@@ -38,9 +62,8 @@ namespace Dennokoworks.UIDesignTest.Mock
             _label.EnableInClassList("dennoko-status--error",   type == StatusType.Error);
             _label.EnableInClassList("dennoko-status--busy",    type == StatusType.Busy);
 
-            bool showProgress = type == StatusType.Busy && progress >= 0f;
-            MockUI.Show(_progress, showProgress);
-            if (showProgress) _progress.style.width = Length.Percent(Mathf.Clamp01(progress) * 100f);
+            _progress = type == StatusType.Busy && progress >= 0f ? Mathf.Clamp01(progress) : -1f;
+            _label.MarkDirtyRepaint();
 
             _reset?.Pause();
             if (type == StatusType.Success || type == StatusType.Warning || type == StatusType.Error)
