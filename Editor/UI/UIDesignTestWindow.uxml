@@ -40,11 +40,15 @@
                 </ui:VisualElement>
                 <ui:VisualElement class="uitest-swatch">
                     <ui:VisualElement class="uitest-swatch-chip uitest-chip--outline" />
-                    <ui:VisualElement class="uitest-swatch-text"><ui:Label text="Outline  #484848" class="uitest-swatch-name" /><ui:Label text="--dennoko-outline" class="uitest-swatch-var" /></ui:VisualElement>
+                    <ui:VisualElement class="uitest-swatch-text"><ui:Label text="Outline  #3d3d3d" class="uitest-swatch-name" /><ui:Label text="--dennoko-outline" class="uitest-swatch-var" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="uitest-swatch">
+                    <ui:VisualElement class="uitest-swatch-chip uitest-chip--outline-subtle" />
+                    <ui:VisualElement class="uitest-swatch-text"><ui:Label text="Outline Subtle  #2b2b2b" class="uitest-swatch-name" /><ui:Label text="--dennoko-outline-subtle" class="uitest-swatch-var" /></ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement class="uitest-swatch">
                     <ui:VisualElement class="uitest-swatch-chip uitest-chip--outline-hover" />
-                    <ui:VisualElement class="uitest-swatch-text"><ui:Label text="Outline Hover  #5e5e5e" class="uitest-swatch-name" /><ui:Label text="--dennoko-outline-hover" class="uitest-swatch-var" /></ui:VisualElement>
+                    <ui:VisualElement class="uitest-swatch-text"><ui:Label text="Outline Hover  #5a5a5a" class="uitest-swatch-name" /><ui:Label text="--dennoko-outline-hover" class="uitest-swatch-var" /></ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
 
@@ -56,11 +60,11 @@
                 </ui:VisualElement>
                 <ui:VisualElement class="uitest-swatch">
                     <ui:VisualElement class="uitest-swatch-chip uitest-chip--text-secondary" />
-                    <ui:VisualElement class="uitest-swatch-text"><ui:Label text="Secondary  #cccccc" class="uitest-swatch-name" /><ui:Label text="--dennoko-text-secondary" class="uitest-swatch-var" /></ui:VisualElement>
+                    <ui:VisualElement class="uitest-swatch-text"><ui:Label text="Secondary  #c4c4c4" class="uitest-swatch-name" /><ui:Label text="--dennoko-text-secondary" class="uitest-swatch-var" /></ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement class="uitest-swatch">
                     <ui:VisualElement class="uitest-swatch-chip uitest-chip--text-tertiary" />
-                    <ui:VisualElement class="uitest-swatch-text"><ui:Label text="Tertiary  #aaaaaa" class="uitest-swatch-name" /><ui:Label text="--dennoko-text-tertiary" class="uitest-swatch-var" /></ui:VisualElement>
+                    <ui:VisualElement class="uitest-swatch-text"><ui:Label text="Tertiary  #8e8e8e" class="uitest-swatch-name" /><ui:Label text="--dennoko-text-tertiary" class="uitest-swatch-var" /></ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement class="uitest-swatch">
                     <ui:VisualElement class="uitest-swatch-chip uitest-chip--text-disabled" />
@@ -201,11 +205,11 @@
             <ui:Button text="Primary Action (.dennoko-button-primary)" class="dennoko-button-primary" />
 
             <ui:Label text="排他選択 (選択中は青枠 .dennoko-button-active)" class="uitest-subhead" />
-            <ui:VisualElement class="dennoko-hrow">
+            <ui:VisualElement class="dennoko-hrow dennoko-segmented">
                 <ui:Button name="mode-select" text="Select" class="uitest-equal" />
                 <ui:Button name="mode-paint" text="Paint" class="uitest-equal" />
             </ui:VisualElement>
-            <ui:VisualElement class="dennoko-hrow">
+            <ui:VisualElement class="dennoko-hrow dennoko-segmented">
                 <ui:Button name="tool-brush" text="Brush" class="uitest-equal" />
                 <ui:Button name="tool-rect" text="Rect" class="uitest-equal" />
                 <ui:Button name="tool-lasso" text="Lasso" class="uitest-equal" />
@@ -359,7 +363,7 @@
             </ui:VisualElement>
 
             <ui:Label text="タブ切替 (ボタン + .dennoko-button-active)" class="uitest-subhead" />
-            <ui:VisualElement class="uitest-tabbar">
+            <ui:VisualElement class="uitest-tabbar dennoko-segmented">
                 <ui:Button name="tab-general" text="一般" class="uitest-equal" />
                 <ui:Button name="tab-output" text="出力" class="uitest-equal" />
                 <ui:Button name="tab-advanced" text="詳細" class="uitest-equal" />

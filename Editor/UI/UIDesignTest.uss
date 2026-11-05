@@ -1,11 +1,6 @@
 /* ============================================================
    UIDesignTest.uss
    UI Design Test ウィンドウ専用のレイアウト用スタイル。
-
-   - 見た目のテーマ (色・ボタン・入力欄の装飾) は DennokoTheme.uss に任せる。
-     ここではテーマの抜けを隠さないよう、ビルトイン要素の装飾は上書きしない。
-   - 規約: セレクタは必ず .dennoko-root を前置する (詳細度 0,2,0 以上)。
-   - カラーは var(--dennoko-*) のみを使う (直書き禁止)。
    ============================================================ */
 
 /* ─── 汎用レイアウト ───────────────────────────────────── */
@@ -17,12 +12,12 @@
     align-items: center;
 }
 
-/* ※ .dennoko-hrow / .dennoko-col-grow は DennokoTheme.uss に定義済み */
+/* ※ .dennoko-hrow / .dennoko-col-grow / .dennoko-segmented は DennokoTheme.uss に定義済み */
 
 /* 横並びの中で縮まない固定幅ボタン */
 .dennoko-root .uitest-fixed-button {
     flex-shrink: 0;
-    width: 64px;
+    width: 60px;
 }
 
 /* 横並びで均等割りにするボタン */
@@ -40,10 +35,10 @@
 
 /* カード内の小見出し (グループの区切り) */
 .dennoko-root .uitest-subhead {
-    font-size: 11px;
+    font-size: 10px;
     -unity-font-style: bold;
     color: var(--dennoko-text-tertiary);
-    margin-top: 10px;
+    margin-top: 8px;
     margin-bottom: 4px;
 }
 
@@ -54,15 +49,15 @@
 
 /* 説明文 (折り返し) */
 .dennoko-root .uitest-note {
-    font-size: 11px;
+    font-size: 10px;
     white-space: normal;
     color: var(--dennoko-text-tertiary);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 /* トグルで制御される従属項目。囲まずインデントだけで階層を示す */
 .dennoko-root .uitest-indent {
-    margin-left: 16px;
+    margin-left: 14px;
 }
 
 /* ─── ヘッダー ─────────────────────────────────────────── */
@@ -80,10 +75,6 @@
     flex-wrap: wrap;
 }
 
-/* 2 カラム固定。左列の文字数に右列の開始位置が押し出されないよう、
-   幅を 50% に固定して伸縮させず、はみ出す文字は省略表示にする。
-   (min-width を付けると狭いウィンドウでコンテンツ幅が広がり、
-   カードがスクロールバーの下へはみ出す原因になる) */
 .dennoko-root .uitest-swatch {
     width: 50%;
     max-width: 50%;
@@ -92,7 +83,7 @@
     flex-shrink: 0;
     flex-direction: row;
     align-items: center;
-    padding: 3px 8px 3px 0;
+    padding: 2px 8px 2px 0;
     overflow: hidden;
 }
 
@@ -104,17 +95,17 @@
 }
 
 .dennoko-root .uitest-swatch-chip {
-    width: 32px;
-    height: 22px;
+    width: 28px;
+    height: 20px;
     flex-shrink: 0;
-    margin-right: 8px;
+    margin-right: 6px;
     border-width: 1px;
     border-color: var(--dennoko-outline);
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 .dennoko-root .uitest-swatch-name {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--dennoko-text-primary);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -122,99 +113,99 @@
 }
 
 .dennoko-root .uitest-swatch-var {
-    font-size: 10px;
+    font-size: 9px;
     color: var(--dennoko-text-tertiary);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.dennoko-root .uitest-chip--surface-0       { background-color: var(--dennoko-surface-0); }
-.dennoko-root .uitest-chip--surface-1       { background-color: var(--dennoko-surface-1); }
-.dennoko-root .uitest-chip--surface-2       { background-color: var(--dennoko-surface-2); }
-.dennoko-root .uitest-chip--surface-3       { background-color: var(--dennoko-surface-3); }
-.dennoko-root .uitest-chip--outline         { background-color: var(--dennoko-outline); }
-.dennoko-root .uitest-chip--outline-hover   { background-color: var(--dennoko-outline-hover); }
-.dennoko-root .uitest-chip--error-text      { background-color: var(--dennoko-semantic-error-text); }
+.dennoko-root .uitest-chip--surface-0        { background-color: var(--dennoko-surface-0); }
+.dennoko-root .uitest-chip--surface-1        { background-color: var(--dennoko-surface-1); }
+.dennoko-root .uitest-chip--surface-2        { background-color: var(--dennoko-surface-2); }
+.dennoko-root .uitest-chip--surface-3        { background-color: var(--dennoko-surface-3); }
+.dennoko-root .uitest-chip--outline-subtle   { background-color: var(--dennoko-outline-subtle); }
+.dennoko-root .uitest-chip--outline          { background-color: var(--dennoko-outline); }
+.dennoko-root .uitest-chip--outline-hover    { background-color: var(--dennoko-outline-hover); }
+.dennoko-root .uitest-chip--error-text       { background-color: var(--dennoko-semantic-error-text); }
 .dennoko-root .uitest-chip--selection-border { background-color: var(--dennoko-selection-border); }
-.dennoko-root .uitest-chip--selection-bg    { background-color: var(--dennoko-selection-bg); }
-.dennoko-root .uitest-chip--list-alt        { background-color: var(--dennoko-list-alt-bg); }
-.dennoko-root .uitest-chip--progress-fill   { background-color: var(--dennoko-progress-fill); }
-.dennoko-root .uitest-chip--status-warning  { background-color: var(--dennoko-status-warning-bg); }
-.dennoko-root .uitest-chip--status-info     { background-color: var(--dennoko-status-info-bg); }
-.dennoko-root .uitest-chip--text-primary    { background-color: var(--dennoko-text-primary); }
-.dennoko-root .uitest-chip--text-secondary  { background-color: var(--dennoko-text-secondary); }
-.dennoko-root .uitest-chip--text-tertiary   { background-color: var(--dennoko-text-tertiary); }
-.dennoko-root .uitest-chip--text-disabled   { background-color: var(--dennoko-text-disabled); }
-.dennoko-root .uitest-chip--error           { background-color: var(--dennoko-semantic-error); }
-.dennoko-root .uitest-chip--warning         { background-color: var(--dennoko-semantic-warning); }
-.dennoko-root .uitest-chip--success         { background-color: var(--dennoko-semantic-success); }
-.dennoko-root .uitest-chip--info            { background-color: var(--dennoko-semantic-info); }
-.dennoko-root .uitest-chip--accent          { background-color: var(--dennoko-accent); }
-.dennoko-root .uitest-chip--checkmark       { background-color: var(--dennoko-checkmark); }
-.dennoko-root .uitest-chip--status-success  { background-color: var(--dennoko-status-success-bg); }
-.dennoko-root .uitest-chip--status-error    { background-color: var(--dennoko-status-error-bg); }
+.dennoko-root .uitest-chip--selection-bg     { background-color: var(--dennoko-selection-bg); }
+.dennoko-root .uitest-chip--list-alt         { background-color: var(--dennoko-list-alt-bg); }
+.dennoko-root .uitest-chip--progress-fill    { background-color: var(--dennoko-progress-fill); }
+.dennoko-root .uitest-chip--status-warning   { background-color: var(--dennoko-status-warning-bg); }
+.dennoko-root .uitest-chip--status-info      { background-color: var(--dennoko-status-info-bg); }
+.dennoko-root .uitest-chip--text-primary     { background-color: var(--dennoko-text-primary); }
+.dennoko-root .uitest-chip--text-secondary   { background-color: var(--dennoko-text-secondary); }
+.dennoko-root .uitest-chip--text-tertiary    { background-color: var(--dennoko-text-tertiary); }
+.dennoko-root .uitest-chip--text-disabled    { background-color: var(--dennoko-text-disabled); }
+.dennoko-root .uitest-chip--error            { background-color: var(--dennoko-semantic-error); }
+.dennoko-root .uitest-chip--warning          { background-color: var(--dennoko-semantic-warning); }
+.dennoko-root .uitest-chip--success          { background-color: var(--dennoko-semantic-success); }
+.dennoko-root .uitest-chip--info             { background-color: var(--dennoko-semantic-info); }
+.dennoko-root .uitest-chip--accent           { background-color: var(--dennoko-accent); }
+.dennoko-root .uitest-chip--checkmark        { background-color: var(--dennoko-checkmark); }
+.dennoko-root .uitest-chip--status-success   { background-color: var(--dennoko-status-success-bg); }
+.dennoko-root .uitest-chip--status-error     { background-color: var(--dennoko-status-error-bg); }
 .dennoko-root .uitest-chip--status-error-text { background-color: var(--dennoko-status-error-text); }
-.dennoko-root .uitest-chip--hover-overlay   { background-color: var(--dennoko-hover-overlay); }
+.dennoko-root .uitest-chip--hover-overlay    { background-color: var(--dennoko-hover-overlay); }
 
 /* Elevation (Surface0 → 1 → 2) の重なり見本 */
 .dennoko-root .uitest-elev-0 {
     background-color: var(--dennoko-surface-0);
     border-width: 1px;
-    border-color: var(--dennoko-outline);
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 8px;
+    border-color: var(--dennoko-outline-subtle);
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 6px;
 }
 
 .dennoko-root .uitest-elev-1 {
     background-color: var(--dennoko-surface-1);
     border-width: 1px;
-    border-color: var(--dennoko-outline);
-    border-radius: 6px;
-    padding: 10px;
-    margin-top: 6px;
+    border-color: var(--dennoko-outline-subtle);
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 5px;
 }
 
 .dennoko-root .uitest-elev-2 {
     background-color: var(--dennoko-surface-2);
+    border-width: 1px;
+    border-color: var(--dennoko-outline);
     border-radius: 4px;
-    padding: 8px;
-    margin-top: 6px;
+    padding: 6px 8px;
+    margin-top: 5px;
 }
 
 /* ─── タイポグラフィ ───────────────────────────────────── */
 
 .dennoko-root .uitest-type-sample {
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .dennoko-root .uitest-version-row {
     flex-direction: row;
     align-items: center;
-    margin-top: 6px;
+    margin-top: 4px;
 }
 
-/* 左の状態ラベル幅を固定し、右のバージョン番号の開始位置を縦に揃える */
 .dennoko-root .uitest-version-key {
-    min-width: 72px;
+    min-width: 68px;
     flex-shrink: 0;
 }
 
-/* フィールドの右カラム (ラベル列 150px + フィールドの左マージン) に揃える補足文 */
+/* フィールドの右カラム (ラベル列 32% / min 112px) に揃える補足文 */
 .dennoko-root .uitest-field-note {
-    margin-left: 153px;
-    font-size: 11px;
+    margin-left: 115px;
+    font-size: 10px;
 }
 
-/* ─── ツールバー (カード見出しの下に置く) ─────────────────
-   どのカードも「見出し + 下線」を最上部に置く構造を崩さないよう、
-   ツールバーは見出しの下に角丸のバーとして配置する。 */
+/* ─── ツールバー (カード見出しの下に置く) ───────────────── */
 
 .dennoko-root .uitest-card-toolbar {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     border-width: 1px;
-    border-color: var(--dennoko-outline);
+    border-color: var(--dennoko-outline-subtle);
     border-radius: 4px;
 }
 
@@ -226,7 +217,7 @@
 }
 
 .dennoko-root .uitest-tab-panel {
-    padding-top: 8px;
+    padding-top: 6px;
 }
 
 .dennoko-root .uitest-hidden {
@@ -235,20 +226,17 @@
 
 /* ─── リスト / 横スクロール ─────────────────────────────── */
 
-/* 高さ = fixed-item-height (22px) × 5 行 + 上下ボーダー (1px × 2)。
-   行の途中で切れた余白が下に残らないようにする */
+/* 高さ = fixed-item-height (22px) × 5 行 + 上下ボーダー (1px × 2)。 */
 .dennoko-root .uitest-list {
     height: 112px;
     flex-shrink: 0;
     margin-top: 4px;
     background-color: var(--dennoko-surface-0);
     border-width: 1px;
-    border-color: var(--dennoko-outline);
+    border-color: var(--dennoko-outline-subtle);
     border-radius: 4px;
 }
 
-/* 行の高さ (ListView がインラインで指定) の中で垂直中央に置く。
-   Label 既定の上下 margin / padding が上寄りの原因なので 0 にする */
 .dennoko-root .uitest-list-item {
     margin: 0;
     padding: 0 8px;
@@ -257,22 +245,22 @@
 
 /* 横スクロール領域は沈めた枠で囲み、内側に余白 (インセット) を持たせる */
 .dennoko-root .uitest-hscroll {
-    height: 68px;
+    height: 62px;
     flex-shrink: 0;
     margin-top: 4px;
     background-color: var(--dennoko-surface-0);
     border-width: 1px;
-    border-color: var(--dennoko-outline);
+    border-color: var(--dennoko-outline-subtle);
     border-radius: 4px;
 }
 
 .dennoko-root .uitest-hscroll .unity-scroll-view__content-container {
-    padding: 6px 6px 4px 6px;
+    padding: 5px 6px 3px 6px;
 }
 
 .dennoko-root .uitest-hscroll-item {
-    width: 96px;
-    height: 36px;
+    width: 88px;
+    height: 32px;
     flex-shrink: 0;
     margin-right: 6px;
     background-color: var(--dennoko-surface-2);
