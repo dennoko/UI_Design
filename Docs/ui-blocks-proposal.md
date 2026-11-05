@@ -1,7 +1,7 @@
 # dennokoworks UI ブロック・画面パターン案
 
 2026-11-06 · dennoko
-前提: [ui-components-proposal.md](ui-components-proposal.md)（部品単位の案）。本案はその部品を組み合わせた 1 段大きい単位（カード・画面・シーン操作 UI）を定義する。**スキルにはまだ反映しない**（ブラッシュアップ用の叩き台）。
+前提: [ui-components-proposal.md](ui-components-proposal.md)（部品単位の案）。本案はその部品を組み合わせた 1 段大きい単位（カード・画面・シーン操作 UI）を定義する。**スキルへ反映済み**（2026-11-06。`.claude/skills/dennokoworks_color_schema/blocks/`。標準ヘッダー・標準フッターは `DennokoTheme.uss` ⑪ と `references/window-guide.md`）。以降はスキル側を正とし、本書は経緯の記録として残す。
 
 Unity 上のモック: UI Design Test（`dennokoworks/UI_design_test`）の末尾の 3 セクション。「SCREEN PATTERNS」で P1〜P5 を切り替えて表示し（状態の切り替えは枠内の ⋮ →「モック」）、「SCENE UI」のボタンでシーン操作 UI（S1〜S6）をシーンに出す。パイメニューはテンプレート化した（[radial-menu-template.md](radial-menu-template.md)）。コードは `Editor/Mock/`、提案中のクラスは `Editor/Mock/UI/DennokoBlocks.uss`（ウィンドウ）と `DennokoSceneUI.uss`（シーン）。
 

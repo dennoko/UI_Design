@@ -2,7 +2,7 @@
 
 2026-11-06 · dennoko
 
-SceneView 上でキーを押している間だけ、カーソル直下に出る 8 方向のメニュー。MaskMakerV4 の `SceneHud`（C 長押しのラジアル）から、ツール固有の部分を抜いてテンプレートにしたもの。**スキルにはまだ反映していない**（UI Design Test で確認してから `assets/SceneView/` に入れる予定）。
+SceneView 上でキーを押している間だけ、カーソル直下に出る 8 方向のメニュー。MaskMakerV4 の `SceneHud`（C 長押しのラジアル）から、ツール固有の部分を抜いてテンプレートにしたもの。**スキルへ反映済み**（2026-11-06。`.claude/skills/dennokoworks_color_schema/blocks/radial-menu.md` と `assets/SceneView/DennokoRadialMenu.cs`）。以降はスキル側を正とする。
 
 | ファイル | 役割 | コピー先での扱い |
 | --- | --- | --- |
