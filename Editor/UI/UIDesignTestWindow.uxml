@@ -443,6 +443,69 @@
             </ui:VisualElement>
         </ui:VisualElement>
 
+        <!-- ═══ 14. 画面パターン (提案: Docs/ui-blocks-proposal.md §1〜§2) ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="SCREEN PATTERNS (提案)" class="dennoko-section-title dennoko-card-header" />
+            <ui:Label text="ウィンドウ全体の型 P1〜P5 と、その中のブロック (対象・設定・プレビュー・リスト・出力・作業中バナー)。枠の中が 1 つのツールウィンドウにあたる。" class="uitest-note" />
+            <ui:VisualElement name="pattern-tabs" class="dennoko-hrow dennoko-segmented">
+                <ui:Button text="P1 変換" class="uitest-equal" />
+                <ui:Button text="P2 手順" class="uitest-equal" />
+                <ui:Button text="P3 一覧" class="uitest-equal" />
+                <ui:Button text="P4 シーン" class="uitest-equal" />
+                <ui:Button text="P5 Insp." class="uitest-equal" />
+            </ui:VisualElement>
+            <ui:Label name="pattern-description" text="" class="uitest-note uitest-pattern-description" />
+            <ui:VisualElement name="pattern-frame" class="uitest-pattern-frame" />
+            <ui:Label text="空 / 警告 / エラー / 候補が複数などの状態は、枠内の ⋮ →「モック」で切り替える。" class="uitest-note uitest-pattern-description" />
+        </ui:VisualElement>
+
+        <!-- ═══ 15. シーン操作 UI (提案: Docs/ui-blocks-proposal.md §3) ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="SCENE UI (提案)" class="dennoko-section-title dennoko-card-header" />
+            <ui:Label text="ボタンでシーンビューに出す。対象は Hierarchy で選択中のオブジェクト (無ければ原点付近のダミー)。対象の正面に 8 × 6 マスの作業面 (偽のメッシュ) が出る。" class="uitest-note" />
+
+            <ui:Label text="ツールバー型 (Mask Maker 風): S1 ツールバー + S3 ラジアル + S4 フィードバック + S5 描画" class="uitest-subhead" />
+            <ui:VisualElement class="dennoko-hrow">
+                <ui:Button name="scene-start-toolbar" text="ツールバー型で開始" class="uitest-equal" />
+            </ui:VisualElement>
+
+            <ui:Label text="パネル型 (Mesh Editor 風): S2 編集パネル + S5 描画" class="uitest-subhead" />
+            <ui:VisualElement name="scene-variant" class="dennoko-hrow dennoko-segmented">
+                <ui:Button text="Mesh Editor" class="uitest-equal" />
+                <ui:Button text="Normal Editor" class="uitest-equal" />
+                <ui:Button text="DenLattice" class="uitest-equal" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-hrow">
+                <ui:Button name="scene-start-panel" text="パネル型で開始" class="uitest-equal" />
+            </ui:VisualElement>
+            <ui:Toggle name="scene-warning" text="パネルに警告行 (NDMF プレビュー未取得) を出す" />
+
+            <ui:Label text="フィードバック (S4) / 情報オーバーレイ (S6)" class="uitest-subhead" />
+            <ui:VisualElement class="dennoko-hrow">
+                <ui:Button name="scene-toast" text="トースト" tooltip="シーン下端の中央に出す (シーンから実行したときはカーソル脇)" class="uitest-equal" />
+                <ui:Button name="scene-hint" text="カーソルヒント" tooltip="迷ったときの 1 行の案内 (見本としてシーン中央に 3 秒)" class="uitest-equal" />
+            </ui:VisualElement>
+            <ui:Toggle name="scene-info" text="情報オーバーレイを表示 (選択中の三角形数)" />
+
+            <ui:Label text="作業中の操作" class="uitest-subhead" />
+            <ui:VisualElement name="scene-keys" class="uitest-keys" />
+            <ui:VisualElement class="dennoko-hrow uitest-session-row">
+                <ui:Label name="scene-session" text="作業していません" class="dennoko-col-grow uitest-session-label" />
+                <ui:Button name="scene-end" text="作業を終了" class="dennoko-button-secondary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ═══ 16. パイメニュー (テンプレート: Editor/SceneUI/DennokoRadialMenu.cs) ═══ -->
+        <ui:VisualElement class="dennoko-card">
+            <ui:Label text="RADIAL MENU (テンプレート)" class="dennoko-section-title dennoko-card-header" />
+            <ui:Label text="シーン上でキーを押している間だけカーソル直下に出るパイメニュー。本体 (DennokoRadialMenu.cs) はそのままコピーし、ツール側は項目 8 個と [ClutchShortcut] だけを書く (例: Mock/Scene/MockRadialMenu.cs、手順: Docs/radial-menu-template.md)。" class="uitest-note" />
+            <ui:VisualElement name="radial-keys" class="uitest-keys" />
+            <ui:VisualElement class="dennoko-hrow">
+                <ui:Button name="radial-open" text="シーンに出す (クリックで選ぶ)" tooltip="ツールバー型の作業を開始して、シーン中央に固定表示で出す" class="uitest-equal" />
+                <ui:Button name="radial-shortcuts" text="キーの割り当て…" tooltip="Shortcut Manager を開く (dennokoworks/UI Mock/Radial Menu)" class="uitest-equal" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
     </ui:ScrollView>
 
     <!-- ───────── フッター (固定クローム) ─────────

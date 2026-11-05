@@ -750,8 +750,10 @@
 /* ─── ⑥ スライダー ─────────────────────────────────────────
    視認性の高い 4px トラック (--dennoko-outline-hover: #5a5a5a) +
    正円つまみ + 48px のコンパクトな数値入力欄。
-   ※ Unity の drag-container は 18px 高 (中心 = 9px) のため、
-      4px トラックは margin-top: 7px (7 + 2 = 9px) でつまみ (4 + 5 = 9px) と中心軸を一致させる。 */
+   ※ 中心軸は drag-container の上から 9px (掴んだときの 18px の青い輪 = dragger-border の中心)。
+      Unity 2022.3 の既定はトラックが top: 6px (相対ずらし)、つまみはトラックの下に続けて並ぶ (relative)。
+      そのため top を 0 に戻し、トラックは margin-top: 7px (7 + 2 = 9px)、
+      つまみは margin-top: -7px (トラック下端 11px − 7px = 4px、4 + 5 = 9px) で中心を揃える。 */
 
 .dennoko-root .unity-base-slider > .unity-base-field__input,
 .dennoko-root .unity-base-slider:hover > .unity-base-field__input,
@@ -804,18 +806,31 @@
 }
 
 .dennoko-root .unity-base-slider--horizontal .unity-base-slider__tracker {
+    top: 0;
     height: 4px;
     margin-top: 7px;
     margin-bottom: 0;
 }
 
+/* 縦: トラックは absolute (既定 left: 4px)。つまみは x = 0〜10px (中心 5px) なので
+   left: 0 + margin-left: 3px (3 + 2 = 5px) で揃える */
 .dennoko-root .unity-base-slider--vertical .unity-base-slider__tracker {
+    left: 0;
     width: 4px;
-    margin-left: 7px;
+    margin-left: 3px;
     margin-right: 0;
 }
 
-/* 正円のシャープなつまみ (中心軸 9px は Unity 既定の margin-top: 4px / height: 10px を活かす) */
+.dennoko-root .unity-base-slider--horizontal .unity-base-slider__dragger {
+    margin-top: -7px;
+}
+
+/* 中身の高さ (14px) に縮むと行の中心より下に寄るため、青い輪と同じ 18px に固定して行の中心に置く */
+.dennoko-root .unity-base-slider--horizontal .unity-base-slider__drag-container {
+    height: 18px;
+}
+
+/* 正円のシャープなつまみ (10px) */
 .dennoko-root .unity-base-slider__dragger {
     background-color: var(--dennoko-text-primary);
     border-color: var(--dennoko-surface-0);
@@ -837,7 +852,9 @@
     padding-bottom: 1px;
 }
 
+/* 既定の top: 6px を消し、つまみ (absolute, margin-top: 4px, 10px 高 → 中心 9px) に揃える */
 .dennoko-root .unity-min-max-slider__tracker {
+    top: 0;
     height: 4px;
     margin-top: 7px;
     margin-bottom: 0;
@@ -927,10 +944,12 @@
     height: auto;
 }
 
+/* margin: 0 は上のスライダー用 margin-top: -7px をスクロールバーで打ち消すため */
 .dennoko-root .unity-scroller .unity-base-slider__dragger {
     background-color: var(--dennoko-outline);
     border-width: 0;
     border-radius: 4px;
+    margin: 0;
 }
 
 .dennoko-root .unity-scroller .unity-base-slider__dragger:hover {

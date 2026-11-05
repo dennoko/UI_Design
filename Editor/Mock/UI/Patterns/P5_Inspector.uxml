@@ -1,0 +1,83 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <!-- P5 コンポーネント編集: Inspector から編集モードに入る (DennokoMeshEditor 風)
+         モックなので EditorWindow の中に Inspector の見た目を再現している -->
+
+    <ui:VisualElement class="uimock-inspector">
+        <!-- Unity が描くコンポーネント見出し (の再現) -->
+        <ui:VisualElement class="uimock-inspector-header">
+            <ui:VisualElement name="inspector-icon" class="dennoko-icon" />
+            <ui:Label text="Den Mesh Editor" class="uimock-inspector-header__title" />
+            <ui:Label text="Inspector の再現" class="uimock-inspector-header__note" />
+        </ui:VisualElement>
+
+        <ui:ScrollView name="main-scroll" class="dennoko-scroll">
+            <ui:VisualElement class="uimock-inspector-body">
+
+                <!-- トップバー簡略版 (ツール名は Unity の見出しに出るので省く) -->
+                <ui:VisualElement name="appbar" class="dennoko-appbar dennoko-appbar--compact">
+                    <ui:VisualElement class="dennoko-appbar__title">
+                        <ui:Label name="version-label" text="v1.3.0" class="dennoko-version-label" style="margin-left: 0;" />
+                        <ui:Button name="version-reload-button" class="dennoko-icon-button" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="dennoko-appbar__actions">
+                        <ui:Button name="appbar-lang" text="EN" class="dennoko-appbar-lang" />
+                        <ui:Button name="appbar-manual" class="dennoko-icon-button" />
+                        <ui:Button name="appbar-settings" class="dennoko-icon-button" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <!-- Idle: 主ボタン「シーンで編集」 / Working: B7 作業中バナー -->
+                <ui:Button name="primary-button" text="シーンで編集" class="dennoko-button-primary" />
+                <ui:VisualElement name="session-banner" class="dennoko-session-banner">
+                    <ui:VisualElement class="dennoko-session-dot" />
+                    <ui:Label text="編集中" class="dennoko-session-banner__state" />
+                    <ui:Label name="session-target" text="Body" tooltip="クリックでシーンビューを対象に合わせる" class="dennoko-session-banner__target" />
+                    <ui:VisualElement class="dennoko-session-banner__hint">
+                        <ui:Label text="Esc" class="dennoko-keycap" />
+                        <ui:Label text="で終了" class="dennoko-keyhint-label" style="margin-right: 0;" />
+                    </ui:VisualElement>
+                    <ui:Button name="session-end" text="終了" class="dennoko-button-secondary" />
+                </ui:VisualElement>
+
+                <!-- B2 設定カード (シーンのツールパネルと同じ値。どちらで変えても追従する) -->
+                <ui:VisualElement name="brush-card" class="dennoko-card dennoko-options-card" style="margin-top: 6px;">
+                    <ui:VisualElement class="dennoko-card-header dennoko-card-header--row">
+                        <ui:Label text="ブラシ" class="dennoko-section-title dennoko-card-header__title" />
+                        <ui:Button name="brush-help" class="dennoko-icon-button" />
+                        <ui:Button name="brush-reset" class="dennoko-icon-button" />
+                    </ui:VisualElement>
+                    <ui:Slider name="brush-radius" label="半径" low-value="0.01" high-value="0.3" value="0.08" show-input-field="true" />
+                    <ui:VisualElement class="dennoko-field-row">
+                        <ui:Label text="減衰" class="dennoko-field-row__label" />
+                        <ui:VisualElement name="brush-falloff" class="dennoko-segmented dennoko-choice-group">
+                            <ui:Button text="滑らか" />
+                            <ui:Button text="直線" />
+                            <ui:Button text="鋭い" />
+                            <ui:Button text="一定" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="dennoko-field-row">
+                        <ui:Label text="ミラー" class="dennoko-field-row__label" />
+                        <ui:VisualElement name="brush-mirror" class="dennoko-segmented dennoko-choice-group">
+                            <ui:Button text="なし" />
+                            <ui:Button text="X" />
+                            <ui:Button text="Y" />
+                            <ui:Button text="Z" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <!-- 編集の一覧 (小さなリストカードの例) -->
+                <ui:VisualElement name="edits-card" class="dennoko-card">
+                    <ui:VisualElement class="dennoko-card-header dennoko-card-header--row">
+                        <ui:Label text="編集の一覧" class="dennoko-section-title dennoko-card-header__title" />
+                        <ui:Label name="edits-count" text="3 件" class="dennoko-text-tertiary" style="font-size: 10px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="edits-list" />
+                </ui:VisualElement>
+
+                <ui:Label name="status-label" text="Ready" class="dennoko-status" style="margin-left: 0; margin-right: 0;" />
+            </ui:VisualElement>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

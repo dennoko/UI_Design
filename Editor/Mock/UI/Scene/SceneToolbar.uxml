@@ -1,0 +1,36 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <!-- S1 シーンツールバー (カプセル)。アイコンのみ。名前とキーはツールチップ。
+         同じ位置をモードで差し替える (選択モード = 選択の単位 / ペイントモード = ペイントツール) -->
+    <ui:VisualElement name="capsule" class="dennoko-capsule">
+        <ui:VisualElement class="dennoko-segment">
+            <ui:Button name="mode-select" class="dennoko-icon-button" />
+            <ui:Button name="mode-paint" class="dennoko-icon-button" />
+        </ui:VisualElement>
+        <ui:VisualElement name="seg-units" class="dennoko-segment">
+            <ui:Button name="unit-island" text="島" tooltip="島  1" class="dennoko-choice" />
+            <ui:Button name="unit-part" text="パーツ" tooltip="パーツ  2" class="dennoko-choice" />
+            <ui:Button name="unit-face" text="面" tooltip="面  3" class="dennoko-choice" />
+        </ui:VisualElement>
+        <ui:VisualElement name="seg-tools" class="dennoko-segment">
+            <ui:Button name="tool-brush" class="dennoko-icon-button" />
+            <ui:Button name="tool-rect" class="dennoko-icon-button" />
+            <ui:Button name="tool-lasso" class="dennoko-icon-button" />
+            <ui:Button name="tool-eraser" class="dennoko-icon-button" />
+            <ui:Label name="brush-size" text="" class="dennoko-capsule__value" />
+        </ui:VisualElement>
+        <ui:VisualElement class="dennoko-segment">
+            <ui:Button name="symmetry" class="dennoko-icon-button" />
+        </ui:VisualElement>
+        <ui:VisualElement class="dennoko-segment">
+            <ui:Button name="xray" class="dennoko-icon-button" />
+            <ui:Button name="isolate" class="dennoko-icon-button" />
+        </ui:VisualElement>
+        <ui:VisualElement class="dennoko-segment">
+            <ui:Button name="undo" class="dennoko-icon-button" />
+            <ui:Button name="redo" class="dennoko-icon-button" />
+            <ui:Button name="clear" class="dennoko-icon-button" />
+        </ui:VisualElement>
+        <ui:Button name="export" class="dennoko-icon-button" style="margin-left: 4px;" />
+        <ui:Label name="count" text="0/48" class="dennoko-capsule__count" />
+    </ui:VisualElement>
+</ui:UXML>

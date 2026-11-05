@@ -1,0 +1,69 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <!-- P3 一覧編集: たくさんの項目を見て、絞って、まとめて変える (BatchRenamer 風)
+         このパターンだけページ全体の ScrollView を使わず、リストカードを伸びる領域にする -->
+
+    <!-- ───────── トップバー ───────── -->
+    <ui:VisualElement name="appbar" class="dennoko-appbar">
+        <ui:VisualElement class="dennoko-appbar__title">
+            <ui:Label name="appbar-title" text="Batch Renamer" class="dennoko-title" />
+            <ui:Label name="version-label" text="v1.4.0" class="dennoko-version-label" />
+            <ui:Button name="version-reload-button" class="dennoko-icon-button" />
+        </ui:VisualElement>
+        <ui:VisualElement class="dennoko-appbar__actions">
+            <ui:Button name="appbar-lang" text="EN" class="dennoko-appbar-lang" />
+            <ui:Button name="appbar-manual" class="dennoko-icon-button" />
+            <ui:Button name="appbar-settings" class="dennoko-icon-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <!-- B1 対象カード (フォルダ) -->
+    <ui:VisualElement name="target-card" class="dennoko-card dennoko-target-card uimock-fixed-top">
+        <ui:VisualElement class="dennoko-target-row">
+            <uie:ObjectField name="target-field" type="UnityEditor.DefaultAsset, UnityEditor.CoreModule" />
+            <ui:Button name="target-from-selection" text="選択から" tooltip="Project ビューで選択中のフォルダを入れる" class="dennoko-target-row__action" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <!-- B2 設定カード (一括操作の中身) -->
+    <ui:VisualElement name="options-card" class="dennoko-card dennoko-options-card" style="flex-shrink: 0;">
+        <ui:VisualElement class="dennoko-card-header dennoko-card-header--row">
+            <ui:Label text="置換" class="dennoko-section-title dennoko-card-header__title" />
+            <ui:Button name="options-help" class="dennoko-icon-button" />
+            <ui:Button name="options-reset" class="dennoko-icon-button" />
+        </ui:VisualElement>
+        <ui:TextField name="find-field" label="検索" value="Hair_" />
+        <ui:TextField name="replace-field" label="置換" value="Hair_Base_" />
+        <ui:Toggle name="case-toggle" text="大文字と小文字を区別する" value="true" />
+    </ui:VisualElement>
+
+    <!-- B4 リストカード + B6 実行前確認 (見出しの件数が絞り込みチップを兼ねる) -->
+    <ui:VisualElement name="list-card" class="dennoko-card dennoko-list-card">
+        <ui:VisualElement class="dennoko-card-header dennoko-card-header--row">
+            <ui:Label text="確認" class="dennoko-section-title dennoko-card-header__title" />
+            <ui:Button name="chip-changed" text="変更 0" tooltip="変更される項目だけを表示" class="dennoko-chip" />
+            <ui:Button name="chip-unchanged" text="変更なし 0" tooltip="変更されない項目だけを表示" class="dennoko-chip" />
+            <ui:Button name="chip-conflict" text="衝突 0" tooltip="名前が重複してスキップされる項目だけを表示" class="dennoko-chip dennoko-chip--warning" />
+        </ui:VisualElement>
+        <ui:VisualElement class="dennoko-searchbar">
+            <!-- プレースホルダ (2022.3 の TextField には無い) は C# で重ねる -->
+            <ui:TextField name="search-field" class="dennoko-searchbar__field" />
+            <ui:Button name="search-clear" class="dennoko-icon-button" />
+            <ui:Label name="search-count" text="0 / 0" class="dennoko-searchbar__count" />
+        </ui:VisualElement>
+        <ui:VisualElement class="dennoko-list-card__body">
+            <ui:ListView name="item-list" fixed-item-height="22" selection-type="Multiple" show-alternating-row-backgrounds="ContentOnly" />
+            <ui:VisualElement name="list-empty" class="dennoko-empty-state dennoko-empty-state--overlay">
+                <ui:Label name="list-empty-message" text="フォルダを選ぶと一覧が出ます" class="dennoko-empty-state__message" />
+                <ui:Button name="list-empty-action" text="選択から" class="dennoko-button-secondary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <!-- ───────── フッター (情報欄 + 元に戻す + 主ボタン) ───────── -->
+    <ui:VisualElement class="dennoko-footer">
+        <ui:Label name="footer-info" text="" class="dennoko-footer__info" />
+        <ui:Button name="undo-button" text="元に戻す" class="dennoko-button-secondary" />
+        <ui:Button name="primary-button" text="一括適用" class="dennoko-button-primary" />
+    </ui:VisualElement>
+    <ui:Label name="status-label" text="Ready" class="dennoko-status" />
+</ui:UXML>

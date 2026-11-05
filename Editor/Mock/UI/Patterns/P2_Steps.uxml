@@ -1,0 +1,134 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <!-- P2 手順: 前の手順の結果を次の手順で使う (HairChimera 風) -->
+
+    <!-- ───────── トップバー ───────── -->
+    <ui:VisualElement name="appbar" class="dennoko-appbar">
+        <ui:VisualElement class="dennoko-appbar__title">
+            <ui:Label name="appbar-title" text="Hair Chimera" class="dennoko-title" />
+            <ui:Label name="version-label" text="v2.0.1" class="dennoko-version-label" />
+            <ui:Button name="version-reload-button" class="dennoko-icon-button" />
+        </ui:VisualElement>
+        <ui:VisualElement class="dennoko-appbar__actions">
+            <ui:Button name="appbar-lang" text="EN" class="dennoko-appbar-lang" />
+            <ui:Button name="appbar-manual" class="dennoko-icon-button" />
+            <ui:Button name="appbar-settings" class="dennoko-icon-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <!-- ───────── 手順タブ (スクロール領域の外に固定) ───────── -->
+    <ui:VisualElement name="steps" class="dennoko-tabbar dennoko-tabbar--steps">
+        <ui:Button name="step-0" class="dennoko-tab"><ui:Label name="badge" text="1" class="dennoko-tab__badge" /><ui:Label text="切り分け" class="dennoko-tab__label" /></ui:Button>
+        <ui:Button name="step-1" class="dennoko-tab"><ui:Label name="badge" text="2" class="dennoko-tab__badge" /><ui:Label text="パーツ" class="dennoko-tab__label" /></ui:Button>
+        <ui:Button name="step-2" class="dennoko-tab"><ui:Label name="badge" text="3" class="dennoko-tab__badge" /><ui:Label text="調整" class="dennoko-tab__label" /></ui:Button>
+        <ui:Button name="step-3" class="dennoko-tab"><ui:Label name="badge" text="4" class="dennoko-tab__badge" /><ui:Label text="出力" class="dennoko-tab__label" /></ui:Button>
+    </ui:VisualElement>
+
+    <ui:ScrollView name="main-scroll" class="dennoko-scroll">
+
+        <!-- 手順 1: 切り分け -->
+        <ui:VisualElement name="step-panel-0">
+            <ui:VisualElement name="step-content-0">
+                <ui:VisualElement class="dennoko-card dennoko-target-card">
+                    <ui:VisualElement class="dennoko-target-row">
+                        <uie:ObjectField name="hair-field" type="UnityEngine.GameObject, UnityEngine.CoreModule" allow-scene-objects="true" />
+                        <ui:Button name="hair-from-selection" text="選択から" class="dennoko-target-row__action" />
+                    </ui:VisualElement>
+                    <ui:Label text="髪のメッシュを持つオブジェクトを選びます。" class="dennoko-hint" style="margin-top: 4px;" />
+                </ui:VisualElement>
+                <ui:VisualElement class="dennoko-card">
+                    <ui:VisualElement class="dennoko-card-header dennoko-card-header--row">
+                        <ui:Label text="切り分け" class="dennoko-section-title dennoko-card-header__title" />
+                        <ui:Button name="split-reset" class="dennoko-icon-button" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="dennoko-field-row">
+                        <ui:Label text="単位" class="dennoko-field-row__label" />
+                        <ui:VisualElement name="split-unit" class="dennoko-segmented dennoko-choice-group">
+                            <ui:Button text="UV 島" />
+                            <ui:Button text="マテリアル" />
+                            <ui:Button text="つながり" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:Slider name="split-threshold" label="しきい値" low-value="0" high-value="1" value="0.35" show-input-field="true" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- 手順 2: パーツ -->
+        <ui:VisualElement name="step-panel-1">
+            <ui:VisualElement name="step-warning-1" class="dennoko-inline-warning" style="margin: 0 8px 8px 8px;">
+                <ui:Label text="前の手順が変わりました。もう一度確認してください" class="dennoko-inline-warning__text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="step-empty-1" class="dennoko-card dennoko-empty-state">
+                <ui:Label text="先に「切り分け」を完了してください" class="dennoko-empty-state__message" />
+                <ui:Button name="step-empty-go-1" text="切り分けへ" class="dennoko-button-secondary" />
+            </ui:VisualElement>
+            <ui:VisualElement name="step-content-1">
+                <ui:VisualElement class="dennoko-card">
+                    <ui:VisualElement class="dennoko-card-header dennoko-card-header--row">
+                        <ui:Label text="パーツ" class="dennoko-section-title dennoko-card-header__title" />
+                        <ui:Label text="12 個" class="dennoko-text-tertiary" style="font-size: 10px;" />
+                    </ui:VisualElement>
+                    <ui:Toggle text="前髪" value="true" />
+                    <ui:Toggle text="横髪 L" value="true" />
+                    <ui:Toggle text="横髪 R" value="true" />
+                    <ui:Toggle text="後ろ髪" value="false" />
+                    <ui:Toggle text="アホ毛" value="true" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- 手順 3: 調整 -->
+        <ui:VisualElement name="step-panel-2">
+            <ui:VisualElement name="step-warning-2" class="dennoko-inline-warning" style="margin: 0 8px 8px 8px;">
+                <ui:Label text="前の手順が変わりました。もう一度確認してください" class="dennoko-inline-warning__text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="step-empty-2" class="dennoko-card dennoko-empty-state">
+                <ui:Label text="先に「パーツ」を完了してください" class="dennoko-empty-state__message" />
+                <ui:Button name="step-empty-go-2" text="パーツへ" class="dennoko-button-secondary" />
+            </ui:VisualElement>
+            <ui:VisualElement name="step-content-2">
+                <ui:VisualElement class="dennoko-card">
+                    <ui:VisualElement class="dennoko-card-header dennoko-card-header--row">
+                        <ui:Label text="調整" class="dennoko-section-title dennoko-card-header__title" />
+                        <ui:Button name="adjust-reset" class="dennoko-icon-button" />
+                    </ui:VisualElement>
+                    <ui:Slider label="長さ" low-value="0.5" high-value="1.5" value="1" show-input-field="true" />
+                    <ui:Slider label="太さ" low-value="0.5" high-value="1.5" value="1" show-input-field="true" />
+                    <ui:Toggle text="左右対称にする" value="true" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- 手順 4: 出力 (B5 出力カード) -->
+        <ui:VisualElement name="step-panel-3">
+            <ui:VisualElement name="step-warning-3" class="dennoko-inline-warning" style="margin: 0 8px 8px 8px;">
+                <ui:Label text="前の手順が変わりました。もう一度確認してください" class="dennoko-inline-warning__text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="step-empty-3" class="dennoko-card dennoko-empty-state">
+                <ui:Label text="先に「調整」を完了してください" class="dennoko-empty-state__message" />
+                <ui:Button name="step-empty-go-3" text="調整へ" class="dennoko-button-secondary" />
+            </ui:VisualElement>
+            <ui:VisualElement name="step-content-3">
+                <ui:VisualElement class="dennoko-card dennoko-output-card">
+                    <ui:VisualElement class="dennoko-card-header dennoko-card-header--row">
+                        <ui:Label text="出力" class="dennoko-section-title dennoko-card-header__title" />
+                    </ui:VisualElement>
+                    <ui:TextField label="名前" value="Hair_Chimera" />
+                    <ui:VisualElement class="dennoko-field-row">
+                        <ui:Label text="保存先" class="dennoko-field-row__label" />
+                        <ui:TextField value="Assets/Avatar/Hair" readonly="true" class="dennoko-field-readonly dennoko-col-grow" />
+                        <ui:Button text="選択…" class="dennoko-output__action" />
+                    </ui:VisualElement>
+                    <ui:Toggle text="Prefab も作る" value="true" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+
+    <!-- ───────── フッター (戻る = Secondary、主ボタンは「次へ」/ 最後だけ「出力」) ───────── -->
+    <ui:VisualElement class="dennoko-footer">
+        <ui:Button name="back-button" text="← 戻る" class="dennoko-button-secondary" />
+        <ui:Button name="primary-button" text="次へ" class="dennoko-button-primary" />
+    </ui:VisualElement>
+    <ui:Label name="status-label" text="Ready" class="dennoko-status" />
+</ui:UXML>

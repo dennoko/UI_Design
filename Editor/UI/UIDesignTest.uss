@@ -258,6 +258,56 @@
     padding: 5px 6px 3px 6px;
 }
 
+/* ─── 画面パターン (提案) ───────────────────────────────── */
+
+/* 1 つのツールウィンドウにあたる枠。中身 (トップバー〜ステータス) をこの高さに収める */
+.dennoko-root .uitest-pattern-frame {
+    height: 560px;
+    flex-shrink: 0;
+    margin-top: 6px;
+    overflow: hidden;
+    background-color: var(--dennoko-surface-0);
+    border-width: 1px;
+    border-color: var(--dennoko-outline);
+    border-radius: 6px;
+}
+
+.dennoko-root .uitest-pattern-description {
+    margin-top: 4px;
+}
+
+/* ─── シーン操作 UI / パイメニュー ───────────────────────── */
+
+/* キーキャップ + 説明を折り返して並べる */
+.dennoko-root .uitest-keys {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 2px 0 4px 0;
+}
+
+.dennoko-root .uitest-keys > .dennoko-keycap {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.dennoko-root .uitest-session-row {
+    margin-top: 4px;
+}
+
+.dennoko-root .uitest-session-label {
+    font-size: 10px;
+    color: var(--dennoko-text-tertiary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dennoko-root .uitest-session-label--active {
+    color: var(--dennoko-selection-border);
+    -unity-font-style: bold;
+}
+
 .dennoko-root .uitest-hscroll-item {
     width: 88px;
     height: 32px;

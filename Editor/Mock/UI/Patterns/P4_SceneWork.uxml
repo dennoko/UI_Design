@@ -1,0 +1,132 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <!-- P4 シーン作業: ウィンドウで始め、作業はシーンでする (MaskMakerV4 風)
+         状態は Idle と Working の 2 つだけ。Idle は対象カードと主ボタンだけを出す -->
+
+    <!-- ───────── トップバー ───────── -->
+    <ui:VisualElement name="appbar" class="dennoko-appbar">
+        <ui:VisualElement class="dennoko-appbar__title">
+            <ui:Label name="appbar-title" text="Mask Maker" class="dennoko-title" />
+            <ui:Label name="version-label" text="v4.0.0" class="dennoko-version-label" />
+            <ui:Button name="version-reload-button" class="dennoko-icon-button" />
+        </ui:VisualElement>
+        <ui:VisualElement class="dennoko-appbar__actions">
+            <ui:Button name="appbar-lang" text="EN" class="dennoko-appbar-lang" />
+            <ui:Button name="appbar-manual" class="dennoko-icon-button" />
+            <ui:Button name="appbar-settings" class="dennoko-icon-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <!-- ───────── B7 作業中バナー (Working のみ。スクロール領域の外) ───────── -->
+    <ui:VisualElement name="session-banner" class="dennoko-session-banner">
+        <ui:VisualElement class="dennoko-session-dot" />
+        <ui:Label text="作業中" class="dennoko-session-banner__state" />
+        <ui:Label name="session-target" text="Body" tooltip="クリックでシーンビューを対象に合わせる" class="dennoko-session-banner__target" />
+        <ui:VisualElement class="dennoko-session-banner__hint">
+            <ui:Label text="Esc" class="dennoko-keycap" />
+            <ui:Label text="で終了" class="dennoko-keyhint-label" style="margin-right: 0;" />
+        </ui:VisualElement>
+        <ui:Button name="session-end" text="終了" class="dennoko-button-secondary" />
+    </ui:VisualElement>
+
+    <ui:ScrollView name="main-scroll" class="dennoko-scroll">
+
+        <!-- B1 対象カード -->
+        <ui:VisualElement name="target-card" class="dennoko-card dennoko-target-card" style="margin-top: 8px;">
+            <!-- Idle: 対象を選ぶ行 -->
+            <ui:VisualElement name="target-idle" class="dennoko-target-row">
+                <uie:ObjectField name="target-field" type="UnityEngine.GameObject, UnityEngine.CoreModule" allow-scene-objects="true" />
+                <ui:Button name="target-from-selection" text="選択から" tooltip="Hierarchy で選択中のオブジェクトを入れる" class="dennoko-target-row__action" />
+            </ui:VisualElement>
+            <!-- Working: アイコン + 名前 ▼ (▼ で対象を切り替え) -->
+            <ui:VisualElement name="target-working" class="dennoko-target-row">
+                <ui:Button name="target-switch" class="dennoko-target-working">
+                    <ui:VisualElement name="target-switch-icon" class="dennoko-icon" />
+                    <ui:Label name="target-switch-name" text="Body" class="dennoko-target-working__name" />
+                    <ui:Label text="▼" class="dennoko-target-working__arrow" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:VisualElement name="target-sub" class="dennoko-target-sub">
+                <ui:DropdownField name="target-submesh" />
+                <ui:DropdownField name="target-uv" />
+            </ui:VisualElement>
+            <!-- 候補が複数 (ルートを選んだとき) -->
+            <ui:VisualElement name="target-candidates" class="dennoko-candidates" />
+            <ui:VisualElement name="target-warning" class="dennoko-inline-warning">
+                <ui:Label text="メッシュの Read/Write が無効です" class="dennoko-inline-warning__text" />
+                <ui:Button name="target-fix" text="有効にする" class="dennoko-inline-warning__action" />
+            </ui:VisualElement>
+            <ui:VisualElement name="target-info" class="dennoko-info-row">
+                <ui:Label name="target-info-verts" text="頂点 12,480" />
+                <ui:Label text="サブメッシュ 3" />
+                <ui:Label text="Read/Write 有効" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- B3 プレビューカード (UV ビュー。見出しなし) -->
+        <ui:VisualElement name="uv-card" class="dennoko-card dennoko-preview-card">
+            <ui:VisualElement name="preview" class="dennoko-preview uimock-uv-preview">
+                <ui:VisualElement name="preview-image" class="dennoko-preview__image" />
+                <ui:Label name="preview-message" text="" class="dennoko-preview__message" />
+                <ui:VisualElement name="preview-progress" class="dennoko-preview__progress" />
+                <ui:VisualElement class="dennoko-preview__toolbar">
+                    <ui:Button name="preview-fit" class="dennoko-icon-button" />
+                    <ui:Button name="preview-channel" class="dennoko-icon-button" />
+                    <ui:Button name="preview-popout" class="dennoko-icon-button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-info-row">
+                <ui:Label text="クリック / ドラッグで選択、テクスチャのドロップで取り込み" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- B5 出力カード (3 行以上なのでカード。ドックには要約チップだけ) -->
+        <ui:VisualElement name="output-card" class="dennoko-card dennoko-output-card">
+            <ui:VisualElement class="dennoko-card-header dennoko-card-header--row">
+                <ui:Label text="出力" class="dennoko-section-title dennoko-card-header__title" />
+                <ui:Button name="output-reset" class="dennoko-icon-button" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-output-row">
+                <ui:TextField name="output-name" value="Body_mask" />
+                <ui:Label text=".png" class="dennoko-text-tertiary" style="margin-left: 4px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="output-resolution" class="dennoko-segmented dennoko-choice-group" style="margin-top: 4px;">
+                <ui:Button text="512" />
+                <ui:Button text="1024" />
+                <ui:Button text="2048" />
+                <ui:Button text="4096" />
+            </ui:VisualElement>
+            <ui:VisualElement name="output-details" class="dennoko-details dennoko-details--collapsed">
+                <ui:VisualElement name="output-details-header" class="dennoko-details__header">
+                    <ui:Label name="output-details-arrow" text="▶" class="dennoko-details__arrow" />
+                    <ui:Label text="詳細" class="dennoko-details__title" />
+                    <ui:VisualElement name="output-details-chips" class="dennoko-details__chips" />
+                </ui:VisualElement>
+                <ui:VisualElement class="dennoko-details__content">
+                    <ui:VisualElement class="dennoko-field-row">
+                        <ui:Label text="チャンネル" class="dennoko-field-row__label" />
+                        <ui:VisualElement name="output-channel" class="dennoko-segmented dennoko-choice-group">
+                            <ui:Button text="RGBA" />
+                            <ui:Button text="R" />
+                            <ui:Button text="A" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:IntegerField name="output-padding" label="余白 (px)" value="2" />
+                    <ui:Toggle name="output-invert" text="白黒を反転" value="false" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+
+    <!-- ───────── 出力ドック (要約チップだけ。出力カードが見えている間は隠す) ───────── -->
+    <ui:VisualElement name="output-dock" class="dennoko-output">
+        <ui:VisualElement class="dennoko-output-row">
+            <ui:VisualElement name="output-dock-chips" class="dennoko-output__chips" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <!-- ───────── フッター (Idle = 作業開始 / Working = 出力) ───────── -->
+    <ui:VisualElement name="footer" class="dennoko-footer">
+        <ui:Button name="primary-button" text="作業開始" class="dennoko-button-primary" />
+    </ui:VisualElement>
+    <ui:Label name="status-label" text="Ready" class="dennoko-status" />
+</ui:UXML>

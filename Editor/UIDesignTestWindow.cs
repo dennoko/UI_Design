@@ -12,7 +12,7 @@ namespace Dennokoworks.UIDesignTest
     /// dennokoworks デザインシステム (DennokoTheme.uss) の UI コンポーネントを
     /// 一覧表示して、見た目・テーマ切替・縮小時の挙動を確認するためのサンプルウィンドウ。
     /// </summary>
-    public class UIDesignTestWindow : EditorWindow
+    public partial class UIDesignTestWindow : EditorWindow
     {
         private const string UXML_GUID      = "fbe6a863b0224b27ab1b883f36fcb4ab"; // UI/UIDesignTestWindow.uxml
         private const string THEME_USS_GUID = "3e31c0ea7a244072bb77655bf4a573c8"; // UI/DennokoTheme.uss
@@ -54,6 +54,8 @@ namespace Dennokoworks.UIDesignTest
             DennokoUIFont.Apply(root);
 
             AddStyleSheet(root, THEME_USS_GUID);
+            AddStyleSheet(root, Mock.MockAssets.BLOCKS_USS);   // 提案中のブロック (Mock/UI/DennokoBlocks.uss)
+            AddStyleSheet(root, Mock.MockAssets.MOCK_USS);     // 画面パターンの見本専用 (Mock/UI/UIMock.uss)
             AddStyleSheet(root, LOCAL_USS_GUID);   // テーマより後に追加する (同詳細度は後勝ち)
 
             string uxmlPath = AssetDatabase.GUIDToAssetPath(UXML_GUID);
@@ -74,6 +76,7 @@ namespace Dennokoworks.UIDesignTest
         {
             _progressSchedule?.Pause();
             _statusResetSchedule?.Pause();
+            DisposeProposalSections();
         }
 
         private static void AddStyleSheet(VisualElement root, string guid)
@@ -105,6 +108,10 @@ namespace Dennokoworks.UIDesignTest
 
             root.Q<Button>("apply-button").clicked += () => SetStatus("保存しました。", StatusType.Success);
             root.Q<Button>("reset-all-button").clicked += ResetAll;
+
+            // 提案セクション (14〜16)。画面パターンの枠にも "status-label" などがあるので、
+            // ウィンドウ側の Q() を済ませてから最後に組み立てる
+            BindProposalSections(root);
         }
 
         // ヘッダー: バージョン表示の状態切替 / 全体の無効化
@@ -425,6 +432,7 @@ namespace Dennokoworks.UIDesignTest
         {
             _progressSchedule?.Pause();
             _statusResetSchedule?.Pause();
+            DisposeProposalSections();
 
             var root = rootVisualElement;
             root.Clear();

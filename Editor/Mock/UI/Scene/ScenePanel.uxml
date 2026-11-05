@@ -1,0 +1,114 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <!-- S2 シーンツールパネル。Unity の Overlay (パネル表示) の中身。
+         置くのは「作業中に変える値」と「終了」だけ。中身は 3 ツール分を切り替えて見比べる -->
+    <ui:VisualElement name="panel" class="dennoko-scene-panel">
+
+        <!-- セッション行: ● 編集中 対象名 [✕] -->
+        <ui:VisualElement class="dennoko-scene-panel__session">
+            <ui:VisualElement class="dennoko-session-dot" />
+            <ui:Label text="編集中" class="dennoko-scene-panel__state" />
+            <ui:Label name="session-target" text="Body" tooltip="クリックで対象に合わせる" class="dennoko-scene-panel__target" />
+            <ui:Button name="session-end" class="dennoko-icon-button dennoko-icon-button--small" />
+        </ui:VisualElement>
+
+        <!-- ブラシ (Mesh Editor / Normal Editor) -->
+        <ui:VisualElement name="group-brush">
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="半径" class="dennoko-scene-row__label" />
+                <ui:Slider name="radius-slider" low-value="0.01" high-value="0.3" />
+                <ui:FloatField name="radius-field" class="dennoko-scene-row__value" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="減衰" class="dennoko-scene-row__label" />
+                <ui:VisualElement name="falloff-group" class="dennoko-segmented dennoko-choice-group">
+                    <ui:Button text="滑らか" />
+                    <ui:Button text="直線" />
+                    <ui:Button text="鋭い" />
+                    <ui:Button text="一定" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="ミラー" class="dennoko-scene-row__label" />
+                <ui:VisualElement name="mirror-group" class="dennoko-segmented dennoko-choice-group">
+                    <ui:Button text="なし" />
+                    <ui:Button text="X" />
+                    <ui:Button text="Y" />
+                    <ui:Button text="Z" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- 効果 (Normal Editor): ドラッグした量だけかけ、離すと確定して 0 に戻る -->
+        <ui:VisualElement name="group-effects">
+            <ui:VisualElement class="dennoko-scene-panel__section">
+                <ui:Label text="効果" class="dennoko-scene-panel__section-title" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="滑らか" class="dennoko-scene-row__label" />
+                <ui:Slider name="effect-0" low-value="0" high-value="1" />
+                <ui:Label name="effect-0-percent" class="dennoko-scene-row__percent" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="形状復元" class="dennoko-scene-row__label" />
+                <ui:Slider name="effect-1" low-value="0" high-value="1" />
+                <ui:Label name="effect-1-percent" class="dennoko-scene-row__percent" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="平坦化" class="dennoko-scene-row__label" />
+                <ui:Slider name="effect-2" low-value="0" high-value="1" />
+                <ui:Label name="effect-2-percent" class="dennoko-scene-row__percent" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="消去" class="dennoko-scene-row__label" />
+                <ui:Slider name="effect-3" low-value="0" high-value="1" />
+                <ui:Label name="effect-3-percent" class="dennoko-scene-row__percent" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ラティス (DenLattice) -->
+        <ui:VisualElement name="group-lattice">
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="格子" class="dennoko-scene-row__label" />
+                <ui:IntegerField name="lattice-u" value="3" class="dennoko-scene-row__int" />
+                <ui:IntegerField name="lattice-v" value="3" class="dennoko-scene-row__int" />
+                <ui:IntegerField name="lattice-w" value="3" class="dennoko-scene-row__int" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="ミラー" class="dennoko-scene-row__label" />
+                <ui:VisualElement name="lattice-mirror" class="dennoko-segmented dennoko-choice-group">
+                    <ui:Button text="X" />
+                    <ui:Button text="Y" />
+                    <ui:Button text="Z" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-scene-panel__section">
+                <ui:Label text="ケージ" class="dennoko-scene-panel__section-title" />
+                <ui:Button name="lattice-reset" class="dennoko-icon-button dennoko-icon-button--small" />
+            </ui:VisualElement>
+            <ui:VisualElement class="dennoko-scene-row">
+                <ui:Label text="モード" class="dennoko-scene-row__label" />
+                <ui:VisualElement name="lattice-mode" class="dennoko-segmented dennoko-choice-group">
+                    <ui:Button text="ケージ" />
+                    <ui:Button text="ボックス" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="lattice-box-row" class="dennoko-scene-row">
+                <ui:Label text="操作" class="dennoko-scene-row__label" />
+                <ui:VisualElement name="lattice-box-op" class="dennoko-segmented dennoko-choice-group">
+                    <ui:Button text="移動" tooltip="移動  W" />
+                    <ui:Button text="回転" tooltip="回転  E" />
+                    <ui:Button text="拡縮" tooltip="拡縮  R" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- キーヒント (常設は 2 組まで) -->
+        <ui:VisualElement name="keyhints" class="dennoko-keyhints" />
+
+        <!-- 警告行 (必要なときだけ。全文はツールチップ) -->
+        <ui:VisualElement name="warning" class="dennoko-scene-panel__warning">
+            <ui:VisualElement name="warning-icon" class="dennoko-icon" />
+            <ui:Label name="warning-text" text="NDMF プレビュー未取得" class="dennoko-scene-panel__warning-text" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

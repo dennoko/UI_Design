@@ -1,0 +1,73 @@
+/* ============================================================
+   UIMock.uss
+   モックウィンドウ専用 (提案には含めない) のスタイル。
+   P5 で Inspector の見た目を真似る枠など。
+   ============================================================ */
+
+/* Inspector を真似る枠 (P5)。中身は .dennoko-inspector-root 相当の余白 */
+.dennoko-root .uimock-inspector {
+    flex-grow: 1;
+    margin: 0;
+    background-color: var(--dennoko-surface-0);
+}
+
+/* Unity の Inspector のコンポーネント見出し (Unity 側の見た目なので dennoko の色を使わない) */
+.dennoko-root .uimock-inspector-header {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    height: 22px;
+    padding: 0 6px;
+    background-color: #3e3e3e;
+    border-bottom-width: 1px;
+    border-bottom-color: #232323;
+}
+
+.dennoko-root .uimock-inspector-header > .dennoko-icon {
+    margin-right: 4px;
+}
+
+.dennoko-root .uimock-inspector-header__title {
+    flex-grow: 1;
+    -unity-font-style: bold;
+    color: #c4c4c4;
+}
+
+.dennoko-root .uimock-inspector-header__note {
+    font-size: 9px;
+    color: #8e8e8e;
+}
+
+.dennoko-root .uimock-inspector-body {
+    flex-grow: 1;
+    padding: 6px 10px;
+}
+
+.dennoko-root .uimock-inspector-body > .dennoko-card {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.dennoko-root .uimock-inspector-body > .dennoko-session-banner {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.dennoko-root .uimock-inspector-body > .unity-button.dennoko-button-primary {
+    margin: 4px 0 8px 0;
+}
+
+/* P4 の UV ビュー (プレビューカード) は正方形寄りに高くする */
+.dennoko-root .uimock-uv-preview {
+    height: 240px;
+}
+
+/* P3 は全体のスクロールを使わないので、カードの間隔だけ揃える */
+.dennoko-root .uimock-fixed-top {
+    flex-shrink: 0;
+    margin-top: 8px;
+}
+
+.dennoko-root .uimock-hidden {
+    display: none;
+}
